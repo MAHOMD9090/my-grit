@@ -27,7 +27,6 @@ body {
     height: 100%;
 }
 
-/* App Container mimicking mobile screen limits if viewed on desktop */
 .app-container {
     max-width: 480px;
     margin: 0 auto;
@@ -40,7 +39,6 @@ body {
     border-right: 1px solid var(--border);
 }
 
-/* Top Header */
 header {
     padding: 20px;
     display: flex;
@@ -75,7 +73,6 @@ header {
     color: var(--accent);
 }
 
-/* Main Scrollable Content */
 main {
     flex: 1;
     overflow-y: auto;
@@ -84,7 +81,6 @@ main {
     scroll-behavior: smooth;
 }
 
-/* View Switching Logic */
 .view-panel {
     display: none;
     animation: fadeIn 0.3s ease-in-out forwards;
@@ -99,7 +95,6 @@ main {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Quick Stats Card */
 .hero-metric-card {
     background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
     border: 1px solid var(--border);
@@ -108,17 +103,6 @@ main {
     margin-bottom: 24px;
     position: relative;
     overflow: hidden;
-}
-
-.hero-metric-card::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-    pointer-events: none;
 }
 
 .hero-grid {
@@ -132,7 +116,6 @@ main {
     color: var(--text-muted);
     text-transform: uppercase;
     margin-bottom: 4px;
-    letter-spacing: 0.5px;
 }
 
 .metric-box p {
@@ -140,7 +123,6 @@ main {
     font-weight: 800;
 }
 
-/* Section Headings */
 .section-header {
     display: flex;
     justify-content: space-between;
@@ -166,7 +148,6 @@ main {
     gap: 4px;
 }
 
-/* Task & Goal Lists */
 .item-list {
     display: flex;
     flex-direction: column;
@@ -184,17 +165,12 @@ main {
     transition: all 0.2s ease;
 }
 
-.card-item.completed {
-    opacity: 0.6;
-    border-color: transparent;
-    background: rgba(20, 20, 23, 0.4);
-}
-
 .card-left {
     display: flex;
     align-items: center;
     gap: 14px;
     flex: 1;
+    cursor: pointer;
 }
 
 .checkbox-trigger {
@@ -205,9 +181,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
     transition: all 0.2s;
-    flex-shrink: 0;
 }
 
 .card-item.completed .checkbox-trigger {
@@ -256,7 +230,6 @@ main {
     color: var(--accent);
 }
 
-/* Progress Bar for Goals */
 .goal-progress-container {
     width: 100%;
     height: 6px;
@@ -273,7 +246,31 @@ main {
     transition: width 0.4s ease;
 }
 
-/* Achievements Grid */
+.backup-zone {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.btn-backup {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.upload-label {
+    cursor: pointer;
+}
+
 .achievements-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -287,7 +284,6 @@ main {
     padding: 16px;
     text-align: center;
     opacity: 0.4;
-    transition: all 0.3s ease;
 }
 
 .achievement-card.unlocked {
@@ -305,7 +301,6 @@ main {
     align-items: center;
     justify-content: center;
     margin: 0 auto 12px auto;
-    color: var(--text-muted);
 }
 
 .achievement-card.unlocked .achievement-icon {
@@ -324,7 +319,6 @@ main {
     color: var(--text-muted);
 }
 
-/* Bottom Tab Navigation Bar */
 nav.tab-bar {
     position: absolute;
     bottom: 0;
@@ -353,14 +347,12 @@ nav.tab-bar {
     font-weight: 600;
     cursor: pointer;
     width: 60px;
-    transition: color 0.2s;
 }
 
 .tab-item.active {
     color: var(--accent);
 }
 
-/* Absolute Center Action Button */
 .fab-btn {
     width: 50px;
     height: 50px;
@@ -376,7 +368,6 @@ nav.tab-bar {
     transform: translateY(-14px);
 }
 
-/* Floating Modern Modal Sheet */
 .modal-overlay {
     position: absolute;
     top: 0;
@@ -403,7 +394,6 @@ nav.tab-bar {
     border-top-left-radius: 24px;
     border-top-right-radius: 24px;
     padding: 24px;
-    box-shadow: 0 -10px 25px rgba(0,0,0,0.5);
     transform: translateY(100%);
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -434,7 +424,6 @@ nav.tab-bar {
     text-transform: uppercase;
     color: var(--text-muted);
     margin-bottom: 6px;
-    letter-spacing: 0.5px;
 }
 
 .input-field {
@@ -446,10 +435,6 @@ nav.tab-bar {
     color: var(--text-main);
     font-size: 15px;
     outline: none;
-}
-
-.input-field:focus {
-    border-color: var(--accent);
 }
 
 .radio-tile-group {
@@ -466,7 +451,6 @@ nav.tab-bar {
     text-align: center;
     cursor: pointer;
     font-weight: 600;
-    font-size: 14px;
 }
 
 .radio-tile.selected {
@@ -488,7 +472,6 @@ nav.tab-bar {
     margin-top: 10px;
 }
 
-/* Custom Push Notification Banner UI */
 .notification-toast {
     position: absolute;
     top: 20px;
@@ -496,7 +479,6 @@ nav.tab-bar {
     right: 20px;
     background: rgba(20, 20, 23, 0.95);
     border: 1px solid var(--accent);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     border-radius: 12px;
     padding: 14px 16px;
     display: flex;
@@ -525,7 +507,6 @@ nav.tab-bar {
     color: var(--text-muted);
 }
 
-/* Analytics Chart Container */
 .chart-container {
     position: relative;
     margin-top: 16px;
