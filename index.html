@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>GRIT - Build Unstoppable Momentum</title>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.344.0/dist/umd/lucide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="notification-toast" id="notificationToast">
+            <i data-lucide="bell-ring"></i>
+            <div class="notification-text">
+                <h5 id="notifTitle">Achievement Unlocked!</h5>
+                <p id="notifBody">You are building serious momentum.</p>
+            </div>
+        </div>
+
+        <header>
+            <div class="logo-area">
+                <h1>Grit</h1>
+            </div>
+            <div class="streak-badge">
+                <i data-lucide="flame" style="width: 18px; height: 18px; fill: var(--accent);"></i>
+                <span id="streakCount">3</span> Days
+            </div>
+        </header>
+
+        <main>
+            
+            <div id="view-today" class="view-panel active">
+                <div class="hero-metric-card">
+                    <div class="hero-grid">
+                        <div class="metric-box">
+                            <h3>Grit Score</h3>
+                            <p id="gritScore">78</p>
+                        </div>
+                        <div class="metric-box">
+                            <h3>Completed</h3>
+                            <p id="completionRatio">0/0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-header">
+                    <h2>Today's Protocol</h2>
+                    <button class="btn-action-sm" onclick="openModal('task')"><i data-lucide="plus" style="width:16px;"></i> Add Task</button>
+                </div>
+
+                <div class="item-list" id="taskList">
+                    </div>
+            </div>
+
+            <div id="view-goals" class="view-panel">
+                <div class="section-header">
+                    <h2>Active Milestones</h2>
+                    <button class="btn-action-sm" onclick="openModal('goal')"><i data-lucide="plus" style="width:16px;"></i> New Goal</button>
+                </div>
+                <div class="item-list" id="goalList">
+                    </div>
+            </div>
+
+            <div id="view-analytics" class="view-panel">
+                <div class="section-header">
+                    <h2>Performance Velocity</h2>
+                </div>
+                <div class="chart-container">
+                    <canvas id="analyticsChart"></canvas>
+                </div>
+                
+                <div class="section-header" style="margin-top: 24px;">
+                    <h2>Earned Badges</h2>
+                </div>
+                <div class="achievements-grid" id="achievementsGrid">
+                    </div>
+            </div>
+
+        </main>
+
+        <nav class="tab-bar">
+            <button class="tab-item active" onclick="switchView('today', this)">
+                <i data-lucide="check-square"></i>
+                Today
+            </button>
+            <button class="tab-item" onclick="switchView('goals', this)">
+                <i data-lucide="target"></i>
+                Goals
+            </button>
+            <button class="fab-btn" onclick="openModal('task')">
+                <i data-lucide="plus" style="width: 28px; height: 28px;"></i>
+            </button>
+            <button class="tab-item" onclick="switchView('analytics', this)">
+                <i data-lucide="bar-chart-2"></i>
+                Analytics
+            </button>
+            <button class="tab-item" onclick="triggerSimulatedRemind()">
+                <i data-lucide="bell"></i>
+                Remind
+            </button>
+        </nav>
+
+        <div class="modal-overlay" id="inputModal" onclick="closeModal(event)">
+            <div class="modal-sheet" onclick="event.stopPropagation()">
+                <div class="modal-header">
+                    <h3 id="modalTitle">Create Entry</h3>
+                    <button class="btn-delete" onclick="closeModal(null)"><i data-lucide="x"></i></button>
+                </div>
+                <form id="modalForm" onsubmit="handleFormSubmit(event)">
+                    <input type="hidden" id="entryType" value="task">
+                    
+                    <div class="input-group">
+                        <label id="inputLabelName">Task Description</label>
+                        <input type="text" id="itemName" class="input-field" placeholder="e.g., Hit the weight room" required>
+                    </div>
+
+                    <div class="input-group" id="targetValueGroup">
+                        <label>Target Threshold (Times/Days)</label>
+                        <input type="number" id="itemTarget" class="input-field" value="1" min="1">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Priority Focus</label>
+                        <div class="radio-tile-group">
+                            <div class="radio-tile selected" id="prio-high" onclick="setPriority('High')">High Focus</div>
+                            <div class="radio-tile" id="prio-normal" onclick="setPriority('Normal')">Standard</div>
+                        </div>
+                        <input type="hidden" id="itemPriority" value="High">
+                    </div>
+
+                    <button type="submit" class="btn-submit">Commit to Protocol</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
