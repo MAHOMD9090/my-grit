@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>GRIT - Build Unstoppable Momentum</title>
+    <!-- الموارد الخارجية للأيقونات، الرسوم البيانية ومؤثرات الاحتفال -->
     <script src="https://cdn.jsdelivr.net/npm/lucide@0.344.0/dist/umd/lucide.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -12,32 +13,35 @@
 <body>
 
     <div class="app-container">
+        <!-- بنر الإشعارات الفورية -->
         <div class="notification-toast" id="notificationToast">
             <i data-lucide="bell-ring"></i>
             <div class="notification-text">
-                <h5 id="notifTitle">Achievement Unlocked!</h5>
-                <p id="notifBody">You are building serious momentum.</p>
+                <h5 id="notifTitle">Notification</h5>
+                <p id="notifBody">Details...</p>
             </div>
         </div>
 
+        <!-- الهيدر العلوي وشارة الأيام المتتالية -->
         <header>
             <div class="logo-area">
                 <h1>Grit</h1>
             </div>
             <div class="streak-badge">
                 <i data-lucide="flame" style="width: 18px; height: 18px; fill: var(--accent);"></i>
-                <span id="streakCount">3</span> Days
+                <span id="streakCount">0</span> Days
             </div>
         </header>
 
+        <!-- منطقة العرض الرئيسية -->
         <main>
-            
+            <!-- واجهة اليوم -->
             <div id="view-today" class="view-panel active">
                 <div class="hero-metric-card">
                     <div class="hero-grid">
                         <div class="metric-box">
                             <h3>Grit Score</h3>
-                            <p id="gritScore">78</p>
+                            <p id="gritScore">0</p>
                         </div>
                         <div class="metric-box">
                             <h3>Completed</h3>
@@ -51,19 +55,19 @@
                     <button class="btn-action-sm" onclick="openModal('task')"><i data-lucide="plus" style="width:16px;"></i> Add Task</button>
                 </div>
 
-                <div class="item-list" id="taskList">
-                    </div>
+                <div class="item-list" id="taskList"></div>
             </div>
 
+            <!-- واجهة الأهداف -->
             <div id="view-goals" class="view-panel">
                 <div class="section-header">
                     <h2>Active Milestones</h2>
                     <button class="btn-action-sm" onclick="openModal('goal')"><i data-lucide="plus" style="width:16px;"></i> New Goal</button>
                 </div>
-                <div class="item-list" id="goalList">
-                    </div>
+                <div class="item-list" id="goalList"></div>
             </div>
 
+            <!-- واجهة التحليلات والأوسمة وإدارة الملف الخارجي -->
             <div id="view-analytics" class="view-panel">
                 <div class="section-header">
                     <h2>Performance Velocity</h2>
@@ -71,16 +75,29 @@
                 <div class="chart-container">
                     <canvas id="analyticsChart"></canvas>
                 </div>
+
+                <!-- نظام التحكم في الملف الخارجي لقاعدة البيانات -->
+                <div class="section-header" style="margin-top: 24px;">
+                    <h2>External Data Sync</h2>
+                </div>
+                <div class="backup-zone">
+                    <button class="btn-backup" onclick="exportDataToFile()">
+                        <i data-lucide="download"></i> Export Data File
+                    </button>
+                    <label class="btn-backup upload-label">
+                        <i data-lucide="upload"></i> Import Data File
+                        <input type="file" id="importFileHandler" accept=".json" onchange="importDataFromFile(event)" style="display:none;">
+                    </label>
+                </div>
                 
                 <div class="section-header" style="margin-top: 24px;">
                     <h2>Earned Badges</h2>
                 </div>
-                <div class="achievements-grid" id="achievementsGrid">
-                    </div>
+                <div class="achievements-grid" id="achievementsGrid"></div>
             </div>
-
         </main>
 
+        <!-- شريط التنقل السفلي -->
         <nav class="tab-bar">
             <button class="tab-item active" onclick="switchView('today', this)">
                 <i data-lucide="check-square"></i>
@@ -103,6 +120,7 @@
             </button>
         </nav>
 
+        <!-- نافذة الإدخال السفلية المنبثقة -->
         <div class="modal-overlay" id="inputModal" onclick="closeModal(event)">
             <div class="modal-sheet" onclick="event.stopPropagation()">
                 <div class="modal-header">
@@ -113,13 +131,14 @@
                     <input type="hidden" id="entryType" value="task">
                     
                     <div class="input-group">
-                        <label id="inputLabelName">Task Description</label>
-                        <input type="text" id="itemName" class="input-field" placeholder="e.g., Hit the weight room" required>
+                        <label id="inputLabelName">Description</label>
+                        <input type="text" id="itemName" class="input-field" placeholder="" required>
                     </div>
 
+                    <!-- تحديد عدد الـ Steps المطور للـ Goals -->
                     <div class="input-group" id="targetValueGroup">
-                        <label>Target Threshold (Times/Days)</label>
-                        <input type="number" id="itemTarget" class="input-field" value="1" min="1">
+                        <label>Target Steps (Total Milestones)</label>
+                        <input type="number" id="itemTarget" class="input-field" value="10" min="1">
                     </div>
 
                     <div class="input-group">
